@@ -1,0 +1,74 @@
+<html>
+<head>
+    <title>0407-JavaScript</title>
+    <meta charset="UTF-8">
+    <style>
+        #mouseCanvas{
+            width: 600px;
+            height: 600px;
+            border: 1px solid black;
+        }
+    </style>
+    <script>
+        function btnClick1() {
+            alert("按鈕被按下了!");
+        }
+        function btnClick2(btn=null) {
+            btnName=(btn)?(btn.innerHTML):("按鈕");
+            alert(btnName+"被按下了");
+            /*if (btn==null) {
+                alert("按鈕被按下了!")
+            } else {
+                alert(btn.innerHTML+"被按下了!")
+            } */
+        }
+        //--------------
+        function msMove() {
+            msPos=document.getElementById("mousePos");
+            //msPos.innerHTML="("+event.x+","+event.y+")";
+            msPos.innerHTML=`(${event.offsetX},${event.offsetY})`;
+        }
+        /*
+        function mMove() {console.log("move");}
+        function mEnter() { console.log("enter");}
+        function mLeave() { console.log("leave");}
+        function mOver() { console.log("over");}
+        function mUp() { console.log("up");}
+        function mDown() { console.log("down");}
+        function mOut() { console.log("out");}
+        function dvClick() { console.log("click");}
+        function mWheel() { console.log("wheel");}
+        */
+       function kbDown() {
+            kbOut=document.getElementById("kbOut");
+            kbOut=innerHTML=event.key;
+       }
+    </script>
+</head>
+<body>
+    
+    <button onclick="btnClick2();">按鈕</button>
+    <button onclick="btnClick2(this);">按鈕1</button>
+    <button onclick="btnClick2(this);">按鈕2</button>
+    <hr>
+    <div id="mousePos">(x,y)</div>
+    <div id="mouseCanvas" onmousemove="msMove();"></div>
+    <!--
+    onmousemove="mENter();"
+    onmousemove="mLeave();"
+    onmousemove="mOver();"
+    onmousemove="mUp();"
+    onmousemove="mDown();"
+    onmousemove="mOut();"
+    onmousemove="dvClick();"
+    onmousemove="mWheel();"
+    -->
+    <hr>
+    <input type="text" id="kbIn" placeholder="kbIn" onkeydown="kbDown()">
+    <div id="kbOut">kbOut</div>
+    <script>
+        console.log("page loading!")
+    </script>
+</body>
+
+</html>
