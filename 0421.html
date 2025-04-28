@@ -45,15 +45,14 @@
                 } else {
                     p2=idx;
                     img.src=`pic/${cards[p2]}.png`;
-                    if(cards[p1]!=cards[p2]) {
+                    if(cards[p1]==cards[p2]) {
                         p1=-1;p2=-1;
-                    }    setTimeout(function(){
+                    } else{   setTimeout(function(){
                             imgs[p1].src="pic/0.png";
                             imgs[p2].src="pic/0.png";
                             p1=-1;p2=-1;
-                                            
-                    },1000)
-                
+                            },1000);
+                        }
                 }
             }
         </script>
