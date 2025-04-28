@@ -1,0 +1,69 @@
+<html>
+    <head>
+        <title>0428筆記-JS打字遊戲</title>
+        <meta charset="UTF-8">
+        <style>
+            .word {
+                display:inline-block ;
+                padding: 5px 10px;
+                border: 5px solid gray;
+                text-align: center;
+                font-size: 32pt;
+                font-family: Arial, Helvetica, sans-serif;
+                position: relative;
+            }
+        </style>
+        <script>
+            function kbDown() {
+                //console.log(event.key);
+                event.preventDefault();
+                if(event.key=="Enter"){
+                    input="";
+                }else if(event.key.length == 1){
+                    input+=event.key;
+                }
+            }
+            function rand(min,max) {
+                return Math.floor(Math.random()*(max-min+1))+min;
+            }
+            function genWord() {
+                /*
+                var wordlist=["hello","word","apple","banana","cake"];
+                var idx=Math.floor(Math.random() * wordlist.length);
+                return wordlist[idx];
+                */
+               var len=rand(3,9);//3~9
+               var str="";
+               for(i=0; i<len; i++) {
+                    var CAPS=[65,97]; 
+                    randum=rand(0,25)+CAPS[rand(0,1)];
+                    str+=String.fromCharCode(randum);
+               }
+               return str;
+                }
+            function gameStart() {
+                document.getElementById("btnStart").style.display="none";
+                inou="";
+                t1=setInterval(function(){
+                    var a=document.createElement("div");
+                    a.className="word";
+                    a.innerHTML=genWord();
+                    a.pos={x:0,y:0};
+                    a.style.left=o.pos.x+"px";
+                    a.move=setInterval(function(o){
+                        o.pos.y+=5;
+                        o.style.top=o.pos.y+"px";
+                        if(o.pos.y > document.body.offsetHeight-500) {
+                        clearInterval(o.move);
+                        o.remove();
+                        }
+                },100,a);
+                document.body.appendChild(a);
+                S},1000);
+            }
+        </script>
+    </head>
+    <body onkeydown="kbDown();">
+        <button id="btnStart" onclick="gameStart();">遊戲開始</button>
+    </body>
+</html>
