@@ -7,7 +7,7 @@
             margin-top: 0px;
         }
         #universal {
-            width: 790px;
+            width: 800px;
             height: 800px;
             position: relative;
             background-image: url("pic/bg_stars.jpg");
@@ -22,7 +22,7 @@
             position: absolute;
         }
         #status {
-            width: 800px;
+            width: 790px;
             background:lightgrey;
             position: absolute;
             z-index: 9;
@@ -46,21 +46,38 @@
             ship=document.getElementById("ship");
             ship.w=40;
             ship.h=60;
-            ship.pos={x:380,y:740};
+            ship.pos={x:(800-ship.w),y:800-ship.h};
             ship.style.left=ship.pos.x+"px";
             ship.style.top=ship.pos.y+"px";
             ship.moving=0/* 0 to stop,+1 to left, -1 to left*/
             ship.move=setInterval(function(){
                 if(ship.moving==0) return;
                 if(ship.pos.x==0 && ship.moving <0) return;
-                if(ship.pos.x==760 && ship.moving >0) return;
+                if(ship.pos.x==800-ship.w && ship.moving >0) return;
                 ship.pos.x +=ship.moving;
                 ship.style.left=ship.pos.x+"px";
             },10);
             setInterval(newUFO,1000);
             game_score=0;
             game_second=0;
+            setInterval(function() {
+                game_second++;
+                document.getElementById("gametime").innerHTML=game_second;
+            },1000);
         }
+        function mykeydown() {
+                event.preventDefault();
+                if(event.key=="ArrowLeft") {
+                    ship.moving=-1;
+                } else if(event.key=="ArrowRight") {
+                    ship.moving=1;
+                } else if(event.key==" ") {
+                    shoot();
+                }
+            }
+            function mykeyup() {
+                ship.moving=0;
+            }
         function shoot() {
             var b=document.createElement("div");
             b.className="bullet";
@@ -105,16 +122,6 @@
             },30);
             document.getElementById("universal").appendChild(u);
         }
-        function shipMove() {
-                event.preventDefault();
-                if(event.key=="ArrowLeft") {
-                    ship.moving=-1;
-                } else if(event.key=="ArrowRight") {
-                    ship.moving=1;
-                } else if(event.key==" ") {
-                    shoot();
-                }
-            }
     </script>
 </head>
 <body onload="gameInit();" onkeydown="mykeydown();" onkeyup="mykeyup();">

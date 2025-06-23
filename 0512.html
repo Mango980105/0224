@@ -6,6 +6,7 @@
             body {
                 background-image: url("pic/grass.jpg");
                 background-size: 200px 140px;
+                position: relative;
             }
             #role{
                 width: 48px;
@@ -39,8 +40,6 @@
                     }else if(role.pos.y > role.walkTarget.y) {
                         role.pos.y--;
                         role.faceTo=3;
-                    } else {
-                        role.faceTo=0;
                     }
                     role.style.left=role.pos.x+"px";
                     role.style.top=role.pos.y+"px";
@@ -78,6 +77,5 @@
     </head>
     <body onload="gameInit();" onkeydown="mykeydown()" onclick="walkTo();">
         <div id="role"></div>
-        <a href="index.html">回首頁</a>
     </body>
     </html>
